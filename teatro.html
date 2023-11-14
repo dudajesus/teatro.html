@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>teatro</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script lang="JavaScript">
+        var f, l, c, pre = 0, i, i2, a = 0;
+        f = new Array(15);
+        for (i = 0; i < f.length; ++i) {
+            f[i] = new Array(40);
+        }
+
+        for (i = 0; i < 15; ++i) {
+            for (i2 = 0; i2 < 40; ++i2) {
+                f[i][i2] = 0;
+            }
+        }
+
+        function troca(l, c) {
+            document.getElementById(l + "-" + c).src = "file:///D:/html/prd27 (1).jpg";
+            document.getElementById("cortina").src = "https://img.freepik.com/vector-gratis/pareja-bailarines-ballet-bailan-escenario-teatro_107791-15927.jpg";
+        }
+
+        function pol(l, c) {
+            troca(l, c);
+
+            if (f[l][c] == 0) {
+                if (l <= 4) {
+                    pre += 50;
+                }
+
+                if ((l >= 5) && (l <= 9)) {
+                    pre += 40;
+                }
+
+                if ((l >= 10) && (l <= 14)) {
+                    pre += 30;
+                }
+
+                if ((c >= 10) && (l <= 30)) {
+                    pre = pre + pre / 10;
+                }
+
+                document.getElementById("display").value = "R$" + pre;
+                f[l][c] = 1;
+                a++;
+            }
+        }
+
+        function tot() {
+            if (a == 1) {
+                document.write("você reservou " + a + " poltrona que custa R$ " + pre);
+            } else if (a > 1) {
+                document.write("você reservou " + a + " poltronas que custam R$ " + pre);
+            } else if (a < 1) {
+                document.write("você não reservou poltronas  :(");
+            }
+        }
+    </script>
+</head>
+<body>
+    <script lang="JavaScript">
+        document.write("<table  align='center'><tr><td>");
+        document.write("<img width='1400' height='400' src='https://static.vecteezy.com/ti/vetor-gratis/p3/5272747-fechado-luxo-cortina-vermelha-com-muitas-sombra-foco-feixe-iluminado-palco-textil-fundo-teatral-veludo-tecido-cortinas-cerimonia-de-abertura-gradiente-ilustracao-eps-vetor.jpg' id='cortina'>");
+        document.write("</td></tr></table>");
+
+        document.write("<table border='1'><tr><td>");
+        document.write("valor ingresso</td><td>");
+        document.write("<input type='txt' id='display' value='' readonly >");
+        document.write("</td></tr></table>");
+
+        document.write("<table align='center'>");
+        for (l = 0; l < 15; ++l) {
+            document.write("<tr>");
+            for (c = 0; c < 40; ++c) {
+                document.write("<td><img width='30' height='30' src='https://www.santaclarapoltronas.com.br/imagens/produtos/prd27.jpg' id='" + l + "-" + c + "' onclick='pol(" + l + "," + c + ")'></td>");
+            }
+            document.write("<tr>");
+        }
+        document.write("</table>");
+
+        document.write("<input type='button' value='total' onclick='tot();' >")
+    </script>
+</body>
+</html>
